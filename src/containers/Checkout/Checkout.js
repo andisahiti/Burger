@@ -13,6 +13,7 @@ const Checkout = props => {
 
     const checkoutContinuedHandler = () => {
         props.history.replace('/checkout/contact-data');
+
     }
 
 
@@ -25,7 +26,12 @@ const Checkout = props => {
                 <CheckoutSummary
                     ingredients={props.ings}
                     checkoutCancelled={checkoutCancelledHandler}
-                    checkoutContinued={checkoutContinuedHandler} />
+                    checkoutContinued={() => {
+                        checkoutContinuedHandler()
+                        window.setTimeout(() => {
+                            window.scroll(0, 1000)
+                        }, 200)
+                    }} />
                 <Route
                     path={props.match.path + '/contact-data'}
                     component={ContactData} />
