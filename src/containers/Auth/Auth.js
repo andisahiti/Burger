@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { Redirect, withRouter } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 import Input from '../../components/UI/Input/Input';
 import Button from '../../components/UI/Button/Button';
@@ -99,7 +99,9 @@ const Auth = props => {
 
     if (props.error) {
         errorMessage = (
-            <p>{props.error.message}</p>
+            <p style={{
+                color: 'red'
+            }}>{props.error.message.split('_').join(' ')}</p>
         );
     }
 
@@ -123,7 +125,6 @@ const Auth = props => {
     );
 
 }
-
 const mapStateToProps = state => {
     return {
         loading: state.auth.loading,
@@ -141,4 +142,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Auth));
+export default connect(mapStateToProps, mapDispatchToProps)(Auth);

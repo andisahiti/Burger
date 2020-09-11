@@ -1,22 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-
-import Aux from '../../hoc/Auxi/Auxi';
 import Burger from '../../components/Burger/Burger';
 import BuildControls from '../../components/Burger/BuildControls/BuildControls';
 import Modal from '../../components/UI/Modal/Modal';
 import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
 import Spinner from '../../components/UI/Spinner/Spinner';
-import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 import * as actions from '../../store/actions/index';
-import axios from '../../axios-orders';
-import { withRouter } from 'react-router-dom';
+
 
 const BurgerBuilder = props => {
-    // constructor(props) {
-    //     super(props);
-    //     this.state = {...}
-    // }
+
     const [purchasing, setPurchasing] = useState(false)
     const { onInitIngredients } = props
     useEffect(() => {
@@ -65,7 +58,7 @@ const BurgerBuilder = props => {
 
     if (props.ings) {
         burger = (
-            <Aux>
+            <React.Fragment>
                 <Burger ingredients={props.ings} />
                 <BuildControls
                     ingredientAdded={props.onIngredientAdded}
@@ -75,7 +68,7 @@ const BurgerBuilder = props => {
                     ordered={purchaseHandler}
                     isAuth={props.isAuthenticated}
                     price={props.price} />
-            </Aux>
+            </React.Fragment>
         );
         orderSummary = <OrderSummary
             ingredients={props.ings}
@@ -83,18 +76,16 @@ const BurgerBuilder = props => {
             purchaseCancelled={purchaseCancelHandler}
             purchaseContinued={purchaseContinueHandler} />;
     }
-    // {salad: true, meat: false, ...}
     return (
-        <Aux>
+        <React.Fragment>
             <Modal show={purchasing} modalClosed={purchaseCancelHandler}>
                 {orderSummary}
             </Modal>
             {burger}
-        </Aux>
+        </React.Fragment>
     );
 
 }
-
 const mapStateToProps = state => {
     return {
         ings: state.burgerBuilder.ingredients,
@@ -114,4 +105,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(BurgerBuilder, axios)));
+export default connect(mapStateToProps, mapDispatchToProps)(BurgerBuilder);

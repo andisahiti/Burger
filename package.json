@@ -38,6 +38,7 @@
     "react": "^16.13.1",
     "react-dev-utils": "^4.2.3",
     "react-dom": "^16.13.1",
+    "react-id-generator": "^3.0.1",
     "react-redux": "^5.1.2",
     "react-router-dom": "^4.2.2",
     "react-test-renderer": "^16.0.0",

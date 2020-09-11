@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
-import Aux from '../Auxi/Auxi';
 import classes from './Layout.css';
 import Toolbar from '../../components/Navigation/Toolbar/Toolbar';
 import SideDrawer from '../../components/Navigation/SideDrawer/SideDrawer';
+
 
 const Layout = props => {
     const [showSideDrawer, setSideDrawer] = useState(false)
@@ -12,7 +12,7 @@ const Layout = props => {
 
 
     return (
-        <Aux>
+        <React.Fragment>
             <Toolbar
                 isAuth={props.isAuthenticated}
                 drawerToggleClicked={() => setSideDrawer(!showSideDrawer)
@@ -26,7 +26,7 @@ const Layout = props => {
             <main className={classes.Content}>
                 {props.children}
             </main>
-        </Aux>
+        </React.Fragment>
     )
 
 }

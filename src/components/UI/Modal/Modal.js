@@ -1,17 +1,19 @@
 import React from 'react';
 
 import classes from './Modal.css';
-import Aux from '../../../hoc/Auxi/Auxi';
 import Backdrop from '../Backdrop/Backdrop';
 
+
 const Modal = props => {
+
     //ndrrohet me react.memo
     // shouldComponentUpdate(nextProps, nextState) {
     //     return nextProps.show !== props.show || nextProps.children !== props.children;
     // }
 
+
     return (
-        <Aux>
+        <React.Fragment>
             <Backdrop show={props.show} clicked={props.modalClosed} />
             <div
                 className={classes.Modal}
@@ -21,12 +23,9 @@ const Modal = props => {
                 }}>
                 {props.children}
             </div>
-        </Aux>
+        </React.Fragment>
     )
 
 }
 
-export default React.memo(Modal, (prevProps, nextProps) => {
-    return nextProps.show === prevProps.show &&
-        nextProps.children === prevProps.children;
-});
+export default Modal;
